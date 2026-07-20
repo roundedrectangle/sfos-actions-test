@@ -25,7 +25,7 @@ jobs:
                 sudo mkdir /workspace
                 sudo chown -R mersdk /workspace
                 cd /workspace
-                git clone "https://github.com{{ github.repository }}.git" .
+                git clone "https://github.com/$GITHUB_REPOSITORY.git" .
 
             - name: Try to build a simple program and run it
               run: |
