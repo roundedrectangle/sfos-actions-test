@@ -22,13 +22,15 @@ jobs:
 
             - name: Checkout
               run: |
+                ls / -lha
                 sudo mkdir /workspace
-                sudo chown -R mersdk /workspace
+                sudo chown -R mersdk /workspace /github/home || true
                 cd /workspace
                 git clone "https://github.com/$GITHUB_REPOSITORY.git" .
 
             - name: Try to build a simple program and run it
               run: |
+                pwd; ls -lha
                 cd /workspace
                 ls -lha; which mb2
                 sdk-assistant list
