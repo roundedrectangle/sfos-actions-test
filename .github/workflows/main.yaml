@@ -34,5 +34,9 @@ jobs:
                 export HOME=/home/mersdk
                 
                 mb2 -t SailfishOS-5.0.0.43-armv7hl build-init
+                pwd
+                ls -lha
+                mb2 -t SailfishOS-5.0.0.43-armv7hl build-shell pwd
+                mb2 -t SailfishOS-5.0.0.43-armv7hl build-shell ls -lha
                 mb2 -t SailfishOS-5.0.0.43-armv7hl build-shell gcc main.c -o test
                 mb2 -t $VENDOR-$DEVICE-$PORT_ARCH build-shell ./test
