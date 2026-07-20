@@ -23,7 +23,7 @@ jobs:
             - name: Checkout
               run: |
                 sudo mkdir /workspace
-                sudo chmod -R mersdk /workspace
+                sudo chown -R mersdk /workspace
                 cd /workspace
                 git clone "https://github.com{{ github.repository }}.git" .
 
