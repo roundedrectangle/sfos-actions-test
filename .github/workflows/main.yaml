@@ -23,12 +23,9 @@ jobs:
             - name: Checkout
               run: |
                 sudo mkdir /workspace
-                sudo chmod a+rw /workspace
+                sudo chmod -R mersdk /workspace
                 cd /workspace
-                git init --quiet
-                git remote add origin "https://github.com{{ github.repository }}.git"
-                git fetch --quiet --no-tags --depth=1 origin "${{ github.sha }}"
-                git checkout --quiet FETCH_HEAD
+                git clone "https://github.com{{ github.repository }}.git" .
 
             - name: Try to build a simple program and run it
               run: |
