@@ -17,8 +17,8 @@ jobs:
                 whoami
                 ls -lha
                 echo $PATH
-                which sudo
-                which devel-su
+                which sudo||true
+                #which devel-su||true
 
             - name: Checkout
               run: |
