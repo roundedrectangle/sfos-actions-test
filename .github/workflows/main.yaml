@@ -22,16 +22,14 @@ jobs:
 
             - name: Checkout
               run: |
-                ls / -lha
-                sudo mkdir /workspace
-                sudo chown -R mersdk /workspace /github/home || true
-                cd /workspace
+                export HOME=/home/mersdk
+                cd $HOME
                 git clone "https://github.com/$GITHUB_REPOSITORY.git" .
 
             - name: Try to build a simple program and run it
               run: |
-                cd /workspace
                 export HOME=/home/mersdk
+                cd $HOME
                 
                 mb2 -t SailfishOS-5.0.0.43-armv7hl build-init
                 pwd
