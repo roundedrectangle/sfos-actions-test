@@ -9,7 +9,19 @@ jobs:
         container: coderus/sailfishos-platform-sdk:5.0.0.43
 
         steps:
-            - uses: actions/checkout@v6
+            # can't use actions/checkout (no node)
+            #- uses: actions/checkout@v6
+            - name: Debug
+              run: |
+                pwd
+                ls -lha
+
+            - name: Checkout
+              run: |
+                git init --quiet
+                git remote add origin "https://github.com{{ github.repository }}.git"
+                git fetch --quiet --no-tags --depth=1 origin "${{ github.sha }}"
+                git checkout --quiet FETCH_HEAD
 
             - name: Try to build a simple program and run it
               run: |
