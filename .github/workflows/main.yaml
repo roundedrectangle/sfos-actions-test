@@ -30,10 +30,9 @@ jobs:
 
             - name: Try to build a simple program and run it
               run: |
-                pwd; ls -lha
                 cd /workspace
-                ls -lha; which mb2
-                sdk-assistant list
+                export HOME=/home/mersdk
+                
                 mb2 -t SailfishOS-5.0.0.43-armv7hl build-init
                 mb2 -t SailfishOS-5.0.0.43-armv7hl build-shell gcc main.c -o test
                 mb2 -t $VENDOR-$DEVICE-$PORT_ARCH build-shell ./test
