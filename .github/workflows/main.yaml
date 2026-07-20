@@ -14,10 +14,17 @@ jobs:
             - name: Debug
               run: |
                 pwd
+                whoami
                 ls -lha
+                echo $PATH
+                which sudo
+                which devel-su
 
             - name: Checkout
               run: |
+                sudo mkdir workspace
+                sudo chmod a+rw /workspace
+                cd /workspace
                 git init --quiet
                 git remote add origin "https://github.com{{ github.repository }}.git"
                 git fetch --quiet --no-tags --depth=1 origin "${{ github.sha }}"
