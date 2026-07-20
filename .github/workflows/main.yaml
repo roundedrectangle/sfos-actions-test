@@ -22,7 +22,7 @@ jobs:
 
             - name: Checkout
               run: |
-                sudo mkdir workspace
+                sudo mkdir /workspace
                 sudo chmod a+rw /workspace
                 cd /workspace
                 git init --quiet
