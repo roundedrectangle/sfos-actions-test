@@ -4,37 +4,25 @@ on: [push]
 jobs:
     test:
         runs-on: ubuntu-latest
-        #container:
-        #    image: coderus/sailfishos-platform-sdk:5.0.0.43
         container: coderus/sailfishos-platform-sdk:5.0.0.43
 
-        steps:
-            # can't use actions/checkout (no node)
-            #- uses: actions/checkout@v6
-            - name: Debug
-              run: |
-                pwd
-                whoami
-                ls -lha
-                echo $PATH
-                which sudo||true
-                #which devel-su||true
+        env:
+          RELEASE: 5.0.0.43
+          ARCH: armv7hl
 
+        steps:
             - name: Checkout
               run: |
-                export HOME=/home/mersdk
-                cd $HOME
-                git clone "https://github.com/$GITHUB_REPOSITORY.git" build
+                git clone "https://github.com/$GITHUB_REPOSITORY.git" /home/mersdk/build
 
             - name: Try to build a simple program and run it
               run: |
                 export HOME=/home/mersdk
                 cd $HOME/build
+
+                TARGET=SailfishOS-$RELEASE-$ARCH
+                alias mb2="mb2 -t $TARGET"
                 
-                mb2 -t SailfishOS-5.0.0.43-armv7hl build-init
-                pwd
-                ls -lha
-                mb2 -t SailfishOS-5.0.0.43-armv7hl build-shell pwd
-                mb2 -t SailfishOS-5.0.0.43-armv7hl build-shell ls -lha
-                mb2 -t SailfishOS-5.0.0.43-armv7hl build-shell gcc main.c -o test
-                mb2 -t $VENDOR-$DEVICE-$PORT_ARCH build-shell ./test
+                mb2 build-init
+                mb2 build-shell gcc main.c -o test
+                mb2 build-shell ./test
